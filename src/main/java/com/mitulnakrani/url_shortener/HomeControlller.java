@@ -8,7 +8,8 @@ import org.springframework.ui.Model;
 public class HomeControlller {
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model)
+    {
         model.addAttribute("title", "URL Shortener - using Thymeleaf");
         return "index";
     }
