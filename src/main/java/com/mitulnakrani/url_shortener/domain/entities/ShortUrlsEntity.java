@@ -1,6 +1,9 @@
 package com.mitulnakrani.url_shortener.domain.entities;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import jakarta.persistence.Basic;
@@ -29,16 +32,16 @@ public class ShortUrlsEntity {
     private boolean isPrivate;
     @Basic
     @Column(name = "expires_at", nullable = true)
-    private Timestamp expiresAt;
+    private LocalDateTime expiresAt;
     @Basic
     @Column(name = "created_by", nullable = true)
     private Long createdBy;
     @Basic
     @Column(name = "click_count", nullable = false)
     private long clickCount;
-    @Basic
+    @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_at", nullable = false)
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
     public long getId() {
         return id;
@@ -72,11 +75,11 @@ public class ShortUrlsEntity {
         isPrivate = aPrivate;
     }
 
-    public Timestamp getExpiresAt() {
+    public LocalDateTime getExpiresAt() {
         return expiresAt;
     }
 
-    public void setExpiresAt(Timestamp expiresAt) {
+    public void setExpiresAt(LocalDateTime expiresAt) {
         this.expiresAt = expiresAt;
     }
 
@@ -96,11 +99,11 @@ public class ShortUrlsEntity {
         this.clickCount = clickCount;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
