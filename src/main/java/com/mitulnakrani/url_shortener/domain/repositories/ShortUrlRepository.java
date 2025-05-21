@@ -10,9 +10,7 @@ import java.util.List;
 
 public interface ShortUrlRepository extends JpaRepository<ShortUrlsEntity, Long> {
 
-    //@Query("SELECT s FROM ShortUrlsEntity s LEFT JOIN fetch s.createdBy WHERE s.isPrivate = false ORDER BY s.createdAt DESC")
-    @Query("SELECT s FROM ShortUrlsEntity s WHERE s.isPrivate = false ORDER BY s.createdAt DESC")
-    @EntityGraph(attributePaths = {"createdBy"})
+    @Query("SELECT s FROM ShortUrlsEntity s LEFT JOIN fetch s.createdBy WHERE s.isPrivate = false ORDER BY s.createdAt DESC")
     List<ShortUrlsEntity> findPublicShortUrls();
 }
 
