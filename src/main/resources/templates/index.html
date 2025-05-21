@@ -25,6 +25,7 @@
                         <th>Short URL</th>
                         <th>Original URL</th>
                         <th>Created At</th>
+                        <th>Created</th>
                         <th>Expires At</th>
                     </tr>
                     </thead>
@@ -41,6 +42,7 @@
                                target="_blank"></a>
                         </td>
                         <td th:text="${url.createdAt != null ? #temporals.format(url.createdAt, 'yyyy-MM-dd HH:mm') : 'N/A'}"></td>
+                        <td th:text="${url.createdBy != null ? url.createdBy.name : 'Guest' }"></td>
                         <td th:text="${url.expiresAt != null ? #temporals.format(url.createdAt, 'yyyy-MM-dd HH:mm') : 'N/A'}"></td>
                     </tr>
                     </tbody>

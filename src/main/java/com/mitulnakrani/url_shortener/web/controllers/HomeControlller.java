@@ -1,6 +1,7 @@
 package com.mitulnakrani.url_shortener.web.controllers;
 
 import com.mitulnakrani.url_shortener.domain.entities.ShortUrlsEntity;
+import com.mitulnakrani.url_shortener.domain.models.ShortUrlsEntityDto;
 import com.mitulnakrani.url_shortener.domain.services.ShortUrlService;
 
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class HomeControlller {
     public String home(Model model)
     {
 //      List<ShortUrlsEntity> shortUrls = shortUrlRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
-        List<ShortUrlsEntity> shortUrls = shortUrlService.getAllPublicShortUrls();
+        List<ShortUrlsEntityDto> shortUrls = shortUrlService.getAllPublicShortUrls();
         model.addAttribute("shortUrls", shortUrls);
         model.addAttribute("baseUrl", "http://localhost:8080/"); // Change this to your base URL
         return "index";

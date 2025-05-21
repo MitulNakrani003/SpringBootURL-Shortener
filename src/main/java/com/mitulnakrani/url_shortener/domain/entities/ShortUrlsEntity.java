@@ -9,9 +9,12 @@ import java.util.Objects;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,9 +36,9 @@ public class ShortUrlsEntity {
     @Basic
     @Column(name = "expires_at", nullable = true)
     private LocalDateTime expiresAt;
-    @Basic
-    @Column(name = "created_by", nullable = true)
-    private Long createdBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    private UsersEntity createdBy;
     @Basic
     @Column(name = "click_count", nullable = false)
     private long clickCount;
@@ -83,11 +86,11 @@ public class ShortUrlsEntity {
         this.expiresAt = expiresAt;
     }
 
-    public Long getCreatedBy() {
+    public UsersEntity getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Long createdBy) {
+    public void setCreatedBy(UsersEntity createdBy) {
         this.createdBy = createdBy;
     }
 
