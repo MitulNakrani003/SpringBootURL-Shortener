@@ -50,8 +50,14 @@ public class HomeControlller {
             return "index";
         }
         //TODO: Implement the logic to create a short URL
+        if(2==1)
+        {
+            redirectAttributes.addFlashAttribute("successMessage", "Short URL created successfully!");
+        }
+        else{
+            redirectAttributes.addFlashAttribute("errorMessage", "Short URL already exists!");
+        }
 
-        redirectAttributes.addFlashAttribute("successMessage", "Short URL created successfully!");
         return "redirect:/";
     }
 
