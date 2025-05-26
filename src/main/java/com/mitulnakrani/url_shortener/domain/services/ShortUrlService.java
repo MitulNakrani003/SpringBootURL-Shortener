@@ -1,5 +1,6 @@
 package com.mitulnakrani.url_shortener.domain.services;
 
+import com.mitulnakrani.url_shortener.ApplicationProperties;
 import com.mitulnakrani.url_shortener.domain.entities.ShortUrlsEntity;
 import com.mitulnakrani.url_shortener.domain.models.CreateShortUrlCmd;
 import com.mitulnakrani.url_shortener.domain.models.ShortUrlsEntityDto;
@@ -16,10 +17,12 @@ public class ShortUrlService {
 
     private final ShortUrlRepository shortUrlRepository;
     private final EntityMapper entityMapper;
+    private final ApplicationProperties properties;
 
-    public ShortUrlService(ShortUrlRepository shortUrlRepository) {
+    public ShortUrlService(ShortUrlRepository shortUrlRepository, EntityMapper entityMapper, ApplicationProperties properties) {
         this.shortUrlRepository = shortUrlRepository;
-        this.entityMapper = new EntityMapper();
+        this.entityMapper = entityMapper;
+        this.properties = properties;
     }
 
     public List<ShortUrlsEntityDto> getAllPublicShortUrls() {
@@ -29,12 +32,19 @@ public class ShortUrlService {
     }
 
     public ShortUrlsEntityDto createShortUrl(CreateShortUrlCmd cmd) {
+        if(properties.validationEnabled())
+        {
+            boolean urlExists = UrlExistanceValidator.isUrlExists(cmd.originalURL());
+            if (!urlExists) {
+                throw new RuntimeException("Invalid URL provided: " + cmd.originalURL());
+            }
+        }
         var shortKey = generateUniqueShortKey();
         var myshortUrl = new ShortUrlsEntity();
         myshortUrl.setOriginalUrl(cmd.originalURL());
         myshortUrl.setShortKey(shortKey);
         myshortUrl.setPrivate(false);
-        myshortUrl.setExpiresAt(java.time.LocalDateTime.ofInstant(Instant.now().plus(30, java.time.temporal.ChronoUnit.DAYS), java.time.ZoneId.systemDefault()));
+        myshortUrl.setExpiresAt(java.time.LocalDateTime.ofInstant(Instant.now().plus(properties.defaultExpirationDays(), java.time.temporal.ChronoUnit.DAYS), java.time.ZoneId.systemDefault()));
         myshortUrl.setCreatedAt(java.time.LocalDateTime.now());
         myshortUrl.setClickCount(0);
         shortUrlRepository.save(myshortUrl);
