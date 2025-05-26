@@ -1,6 +1,7 @@
 package com.mitulnakrani.url_shortener.web.controllers;
 
 import com.mitulnakrani.url_shortener.domain.entities.ShortUrlsEntity;
+import com.mitulnakrani.url_shortener.domain.models.CreateShortUrlCmd;
 import com.mitulnakrani.url_shortener.domain.models.ShortUrlsEntityDto;
 import com.mitulnakrani.url_shortener.domain.services.ShortUrlService;
 import com.mitulnakrani.url_shortener.web.dtos.CreateShortUrlForm;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -49,15 +51,14 @@ public class HomeControlller {
             model.addAttribute("baseUrl", "http://localhost:8080/");
             return "index";
         }
-        //TODO: Implement the logic to create a short URL
-        if(2==1)
-        {
-            redirectAttributes.addFlashAttribute("successMessage", "Short URL created successfully!");
-        }
-        else{
+
+        try{
+            CreateShortUrlCmd cmd = new CreateShortUrlCmd(form.originalURL());
+            var shortUrlDto = shortUrlService.createShortUrl(cmd);
+            redirectAttributes.addFlashAttribute("successMessage", "Short URL created successfully!" + "http://localhost:8080/s/" + shortUrlDto.shortKey());
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Short URL already exists!");
         }
-
         return "redirect:/";
     }
 
