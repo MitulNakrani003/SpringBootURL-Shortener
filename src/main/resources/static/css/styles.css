@@ -1,0 +1,7 @@
+/* Navbar hover effect */
+.navbar-nav .nav-link:hover {
+    background-color: #495057; /* Darker gray background */
+    color: #ffffff; /* White text */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}

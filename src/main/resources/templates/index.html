@@ -7,6 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 <div layout:fragment="content">
@@ -18,9 +20,10 @@
                 <h1 class="display-4">Welcome to the URL Shortener</h1>
                 <p class="lead">Easily shorten your long URLs and manage them efficiently.</p>
             </div>
+            <!-- Shorten URL Section -->
             <div class="row mt-4">
                 <div class="col-md-8 offset-md-2">
-                    <div class="card shadow">
+                    <div class="card shadow w-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">Shorten Your URL</h5>
                             <form th:action="@{/shorten}" method="post" th:object="${createShortUrlForm}">
@@ -43,7 +46,7 @@
                 <div class="col">
                     <h3 class="text-center mb-4">Your Shortened URLs</h3>
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover table-bordered">
+                        <table class="table table-striped table-hover">
                             <thead class="table-dark">
                             <tr>
                                 <th>Short URL</th>
@@ -74,8 +77,10 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
+</div>
 </body>
 </html>

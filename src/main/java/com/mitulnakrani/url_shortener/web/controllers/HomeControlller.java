@@ -2,6 +2,7 @@ package com.mitulnakrani.url_shortener.web.controllers;
 
 import com.mitulnakrani.url_shortener.ApplicationProperties;
 import com.mitulnakrani.url_shortener.domain.entities.ShortUrlsEntity;
+import com.mitulnakrani.url_shortener.domain.exception.ShortUrlNotFoundException;
 import com.mitulnakrani.url_shortener.domain.models.CreateShortUrlCmd;
 import com.mitulnakrani.url_shortener.domain.models.ShortUrlsEntityDto;
 import com.mitulnakrani.url_shortener.domain.services.ShortUrlService;
@@ -12,11 +13,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 import jakarta.validation.Valid;
 
@@ -66,5 +69,14 @@ public class HomeControlller {
     }
 
 
+    @GetMapping("/s/{shortKey}")
+    String redirectToOriginalUrl(@PathVariable String shortKey) {
+        Optional<ShortUrlsEntityDto> shortUrlsEntityDtoOptional = shortUrlService.accessShortUrl(shortKey);
+        if (shortUrlsEntityDtoOptional.isEmpty()) {
+            throw new ShortUrlNotFoundException("Invalid short key: " + shortKey);
+        }
+        ShortUrlsEntityDto shortUrl = shortUrlsEntityDtoOptional.get();
+        return "redirect:" + shortUrl.originalUrl();
+    }
 
 }
