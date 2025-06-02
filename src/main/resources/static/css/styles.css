@@ -1,7 +1,44 @@
 /* Navbar hover effect */
 .navbar-nav .nav-link:hover {
     background-color: #495057; /* Darker gray background */
+    /*background-color: white;*/
     color: #ffffff; /* White text */
     border-radius: 5px; /* Optional: Add rounded corners */
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Make the navbar larger */
+.navbar {
+    padding: 1rem 1rem; /* Adjust padding to make the navbar taller */
+}
+
+/* Increase font size of navbar links */
+.navbar-nav .nav-link {
+    font-size: 1.4rem; /* Increase font size */
+    margin-right: 20px; /* Keep spacing between tabs */
+    font-weight: normal !important; /* Set font weight to normal */
+}
+
+/* Increase the brand font size */
+.navbar-brand {
+    font-size: 1.4rem; /* Adjust as needed */
+}
+
+/* Match table header with navbar color */
+.table-dark {
+    background-color: #343a40; /* Same as Bootstrap's bg-dark */
+    color: #ffffff; /* White text */
+}
+
+/* Ensure consistent width and alignment */
+.container-fluid, .container {
+    max-width: 1200px; /* Set a consistent max width */
+    margin: 0 auto; /* Center align the container */
+    padding-left: 15px; /* Add consistent padding */
+    padding-right: 15px; /* Add consistent padding */
+}
+
+/* Adjust card width for "Shorten URL" section */
+.card {
+    width: 100%; /* Ensure card takes full width of container */
 }

@@ -1,0 +1,2 @@
+UPDATE users SET password='$2a$10$wBeltn0jSDNK55/6fMglGu.QA.aUZwyxYsaH/eqE0/zMLQBvSzRE2' WHERE email='mitul@example.com';
+UPDATE users SET password='$2a$10$WJAyV.zeBPyjEIb2Fl0vau3blLpve4mQIj0Yrokd9cZw6XYU2.Rye' WHERE email='admin@example.com';

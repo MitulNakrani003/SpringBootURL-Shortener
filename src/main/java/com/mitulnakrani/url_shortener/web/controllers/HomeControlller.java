@@ -79,4 +79,9 @@ public class HomeControlller {
         return "redirect:" + shortUrl.originalUrl();
     }
 
+    @GetMapping("/login")
+    String loginForm(){
+        return "login";
+    }
+
 }
