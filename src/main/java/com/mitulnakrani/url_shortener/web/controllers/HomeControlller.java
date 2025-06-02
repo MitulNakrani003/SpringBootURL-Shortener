@@ -2,6 +2,7 @@ package com.mitulnakrani.url_shortener.web.controllers;
 
 import com.mitulnakrani.url_shortener.ApplicationProperties;
 import com.mitulnakrani.url_shortener.domain.entities.ShortUrlsEntity;
+import com.mitulnakrani.url_shortener.domain.entities.UsersEntity;
 import com.mitulnakrani.url_shortener.domain.exception.ShortUrlNotFoundException;
 import com.mitulnakrani.url_shortener.domain.models.CreateShortUrlCmd;
 import com.mitulnakrani.url_shortener.domain.models.ShortUrlsEntityDto;
@@ -28,16 +29,19 @@ public class HomeControlller {
 
     private final ShortUrlService shortUrlService;
     private final ApplicationProperties properties;
+    private final SecurityUtils securityUtils;
 
-    public HomeControlller(ShortUrlService shortUrlService, ApplicationProperties properties) {
+    public HomeControlller(ShortUrlService shortUrlService, ApplicationProperties properties, SecurityUtils securityUtils) {
         this.shortUrlService = shortUrlService;
         this.properties = properties;
+        this.securityUtils = securityUtils;
     }
 
     @GetMapping("/")
     public String home(Model model)
     {
 //      List<ShortUrlsEntity> shortUrls = shortUrlRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+        UsersEntity currentUser = securityUtils.getCurrentUser(); // This line is to ensure the current user is fetched, if needed later.
         List<ShortUrlsEntityDto> shortUrls = shortUrlService.getAllPublicShortUrls();
         model.addAttribute("shortUrls", shortUrls);
         model.addAttribute("baseUrl", properties.baseUrl());

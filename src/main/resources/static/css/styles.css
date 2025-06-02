@@ -14,14 +14,14 @@
 
 /* Increase font size of navbar links */
 .navbar-nav .nav-link {
-    font-size: 1.4rem; /* Increase font size */
-    margin-right: 20px; /* Keep spacing between tabs */
+    font-size: 1rem; /* Increase font size */
+    margin-right: 15px; /* Keep spacing between tabs */
     font-weight: normal !important; /* Set font weight to normal */
 }
 
 /* Increase the brand font size */
 .navbar-brand {
-    font-size: 1.4rem; /* Adjust as needed */
+    font-size: 1.2rem; /* Adjust as needed */
 }
 
 /* Match table header with navbar color */
