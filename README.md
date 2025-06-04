@@ -14,7 +14,7 @@ A simple URL shortener service built with Spring Boot that converts long URLs in
 - Java 8+
 - Spring Boot
 - Spring Data JPA
-- MySQL/H2 Database
+- Postgres Database
 - Maven
 
 ## Setup
